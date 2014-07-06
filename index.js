@@ -9,31 +9,35 @@ var exitCode = 0;
 module.exports = function(src) {
   var totalLintErrors = null;
 
-  return gulp.src(src)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(map(function (file, cb) {
-      if (!file.jshint.success) {
-        totalLintErrors += file.jshint.results.length;
-        exitCode = 1;
-      }
-      cb(null, file);
-    }))
-    .on('end', function () {
-      var errString = totalLintErrors + '';
-      if (exitCode) {
-        console.log(gutil.colors.magenta(errString), 'errors\n');
-        gutil.beep();
-      }
-      if (exitCode) {
-        process.emit('lint-fail');
-      }
-    });
+  return function() {
+
+    return gulp.src(src)
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(map(function(file, cb) {
+        if (!file.jshint.success) {
+          totalLintErrors += file.jshint.results.length;
+          exitCode = 1;
+        }
+        cb(null, file);
+      }))
+      .on('end', function() {
+        var errString = totalLintErrors + '';
+        if (exitCode) {
+          console.log(gutil.colors.magenta(errString), 'errors\n');
+          gutil.beep();
+        }
+        if (exitCode) {
+          process.emit('lint-fail');
+        }
+      });
+  }
 }
 
 
-process.on('lint-fail', function () {
-  process.nextTick(function () {
+
+process.on('lint-fail', function() {
+  process.nextTick(function() {
     var msg = "gulp '" + gulp.seq + "' failed";
     console.log(gutil.colors.red(msg));
     process.exit(exitCode);
