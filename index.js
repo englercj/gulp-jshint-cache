@@ -9,9 +9,8 @@ var exitCode = 0;
 module.exports = function(src) {
   var totalLintErrors = null;
 
-  return function() {
-
-    return gulp.src(src)
+  return function(callback) {
+    gulp.src(src)
       .pipe(jshint())
       .pipe(jshint.reporter('default'))
       .pipe(map(function(file, cb) {
@@ -22,18 +21,16 @@ module.exports = function(src) {
         cb(null, file);
       }))
       .on('end', function() {
+
         var errString = totalLintErrors + '';
         if (exitCode) {
           console.log(gutil.colors.magenta(errString), 'errors\n');
-          gutil.beep();
-        }
-        if (exitCode) {
           process.emit('lint-fail');
         }
+        callback();
       });
   }
 }
-
 
 
 process.on('lint-fail', function() {
