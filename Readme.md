@@ -18,7 +18,7 @@ gulp.task('lint-watch', ['lint'], function(neverCalled) {
 ```
 
 Options:
-  - `src`* -- sources for `glob.src`
+  - `src` -- sources for `glob.src` (required)
   - `dieOnError` -- if true, the process will die with error status `1` if lint fails. Use this for git pre-commit check.
   - `jshint` -- options for `gulp-jshint`
 
