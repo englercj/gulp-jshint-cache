@@ -1,7 +1,7 @@
 
 # Fast cached jshint for gulp
 
-It uses in memory stat cache, that's why `lint-watch` is blazing fast.
+It uses in-memory stat cache, that's why `lint-watch` is blazing fast.
 
 Usage:
 ```js
