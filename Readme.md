@@ -1,4 +1,6 @@
 
+# Deprecated
+
 Gulp task for linting which makes process exit with non-zero status on fail.
 
 Can be used with git pre-commit hook to deny bad javascript.

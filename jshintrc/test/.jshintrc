@@ -11,6 +11,7 @@
   "multistr": true,
   "noyield": true,
   "expr": true,
+  "-W004": true,
   "globals"   : {
     "describe"   : false,
     "it"         : false,
