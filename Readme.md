@@ -5,11 +5,12 @@ It uses in memory stat cache, that's why `lint-watch` is blazing fast.
 
 Usage:
 ```js
+var jshint = require('gulp-jshint-cache');
 var sources = './**/*.js';
 
-gulp.task('lint', gp.jshintCache({ src: sources }));
+gulp.task('lint', jshint({ src: sources }));
 
-gulp.task('lint-or-die', gp.jshintCache({ src: sources, dieOnError: true }));
+gulp.task('lint-or-die', jshint({ src: sources, dieOnError: true }));
 
 gulp.task('lint-watch', ['lint'], function(neverCalled) {
   gulp.watch(serverSources, ['lint']);
