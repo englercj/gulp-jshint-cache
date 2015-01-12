@@ -52,7 +52,7 @@ module.exports = function(options) {
         this.push(source);
         callback();
       }))
-      .pipe(gp.jshint.reporter('default'));
+      .pipe(gp.jshint.reporter(options.reporter || 'default'));
 
     if (options.dieOnError) {
       stream
